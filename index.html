@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centennial Sovereign Core</title>
+    <style>
+        body { background-color: #050505; color: #00ffcc; font-family: 'Courier New', monospace; text-align: center; padding: 20px; }
+        h1 { border-bottom: 2px solid #00ffcc; display: inline-block; padding-bottom: 10px; margin-bottom: 5px; }
+        #cady-brain { font-size: 1.1em; margin-bottom: 20px; color: #ffcc00; }
+
+        .agent-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 20px auto; max-width: 800px; }
+        button { background: transparent; color: #00ffcc; border: 1px solid #00ffcc; padding: 10px; cursor: pointer; transition: 0.3s; font-size: 12px; }
+        button:hover { background: #00ffcc; color: #000; }
+
+        #telemetry-display { margin-top: 30px; padding: 20px; border: 1px solid #333; background: #111; min-height: 100px; text-align: left; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+    <h1>CENTENNIAL SOVEREIGN CORE</h1>
+    <div id="cady-brain">Status: Cady Online. Coordinating 16 Agents...</div>
+
+    <div class="agent-grid">
+        <button onclick="deployAgent('Sipahi-R1')">Sipahi-R1</button>
+        <button onclick="deployAgent('Garuda')">Garuda</button>
+        <button onclick="deployAgent('Vishwakarma')">Vishwakarma</button>
+        <button onclick="deployAgent('Kuber')">Kuber</button>
+        <button onclick="deployAgent('Hermes')">Hermes</button>
+        <button onclick="deployAgent('Agastya')">Agastya</button>
+        <button onclick="deployAgent('Cady')">Cady (Super-Brain)</button>
+        <button onclick="deployAgent('Matrix')">Matrix</button>
+        <button onclick="deployAgent('Varuna')">Varuna</button>
+        <button onclick="deployAgent('RK')">RK</button>
+        <button onclick="deployAgent('Vyasa')">Vyasa</button>
+        <button onclick="deployAgent('Chanakya')">Chanakya</button>
+        <button onclick="deployAgent('Netra')">Netra</button>
+        <button onclick="deployAgent('Senapati')">Senapati</button>
+        <button onclick="deployAgent('Bhumi')">Bhumi</button>
+        <button onclick="deployAgent('Kripa')">Kripa</button>
+    </div>
+
+    <div id="telemetry-display">System Status: Waiting for Master Command...</div>
+
+    <script>
+    async function deployAgent(agentName) {
+        const display = document.getElementById("telemetry-display");
+        display.innerText = "Initializing " + agentName + "...";
+
+        // यहाँ URL में ${agentName} पक्का होना चाहिए
+        const url = `https://cy40pkkg2rn4.share.zrok.io/run/Cady/deploy/${agentName}`;
+
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            display.innerText = "AGENT: " + agentName + "\n-------------------\n" + data.output;
+        } catch (err) {
+            display.innerText = "Error: Connection Failed.";
+        }
+    }
+
+    </script>
+</body>
+</html>
